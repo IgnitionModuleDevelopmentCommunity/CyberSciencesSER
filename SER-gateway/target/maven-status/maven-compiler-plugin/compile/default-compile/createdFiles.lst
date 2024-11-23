@@ -1,0 +1,4 @@
+org\imdc\cybersciences\ser\SERDevice$EventStatus.class
+org\imdc\cybersciences\ser\TagManager.class
+org\imdc\cybersciences\ser\SERDevice$ChannelConfig.class
+org\imdc\cybersciences\ser\TagBuilder.class
