@@ -482,8 +482,12 @@ public class SERDevice implements IRecordListener<DatasourceRecord> {
     }
 
     private void getChannelData() throws Exception {
-        String response = httpGet("/channels/data");
+        String response = httpGet("/channels/status");
         JSONObject jsonObj = new JSONObject(response);
+        Long status = jsonObj.getLong("status");
+
+        response = httpGet("/channels/data");
+        jsonObj = new JSONObject(response);
         JSONArray channels = jsonObj.getJSONArray("channels_data");
         for (int i = 0; i < channels.length(); i++) {
             Integer channelNum = i + 1;
@@ -494,12 +498,14 @@ public class SERDevice implements IRecordListener<DatasourceRecord> {
 
             String channelTagPath = "Channels/Channel" + channelConfig.getChannel();
             Integer value = channelObj.getInt("value");
-            String status = value == 0 ? channelConfig.getOffText() : channelConfig.getOnText();
+            Boolean channelStatus = ((status >> i) & 0x1) == 0x1;
+            String channelStatusStr = channelStatus ? channelConfig.getOnText() : channelConfig.getOffText();
 
             updateTag(String.format("%s/SecondsUTC", channelTagPath), channelObj.getLong("secondsUTC"));
             updateTag(String.format("%s/DSTActive", channelTagPath), channelObj.getInt("dst_active") != 0);
-            updateTag(String.format("%s/Value", channelTagPath), value != 0);
-            updateTag(String.format("%s/Status", channelTagPath), status);
+            updateTag(String.format("%s/Value", channelTagPath), channelStatus);
+            updateTag(String.format("%s/Counter", channelTagPath), value);
+            updateTag(String.format("%s/Status", channelTagPath), channelStatusStr);
         }
     }
 

@@ -123,6 +123,7 @@ public class SERDeviceManager implements IRecordListener<SERDeviceRecord> {
         builder.addMember("SecondsUTC", DataType.Int8);
         builder.addMember("DSTActive", DataType.Boolean);
         builder.addMember("Value", DataType.Boolean);
+        builder.addMember("Counter", DataType.Int8);
         builder.addMember("Status", DataType.String);
         getTagManager().registerUDT(builder.build());
 

@@ -14,7 +14,7 @@
         <ignition-sdk-version>8.1.25</ignition-sdk-version>
         <module-name>CyberSciences SER Module</module-name>
         <module-description>Adds support for CyberSciences SER devices</module-description>
-		<module-version>1.0.0</module-version>
+		<module-version>1.0.1</module-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <timestamp>${maven.build.timestamp}</timestamp>
